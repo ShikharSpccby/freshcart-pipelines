@@ -18,13 +18,13 @@ freshcart-pipelines/
 │   ├── __init__.py
 │   └── settings.py                     # Centralized project configuration and environment bindings
 ├── elt/                                # Part B: FreshCart ELT Pipeline on Snowflake
-│   ├── freshcart_elt.py                # Python orchestration script for Snowflake SQL & DQ checks
+│                
 │   ├── freshcart_elt.ipynb             # Interactive Jupyter notebook with outputs
-│   └── sql/
-│       ├── 00_setup_and_bronze.sql     # Database, schema, staging, tables, and reference data setup
-│       ├── 10_orders_clean.sql         # Silver cleaning, validation rules, and quarantine MERGE
-│       ├── 20_orders_dedup.sql         # Silver deduplication via window ranking
-│       └── 30_gold_fct_orders.sql      # Gold fact table model with SCD2 temporal joins & row_hash
+│   └── sql
+│      
+│       
+│       
+│           
 ├── iris_project/                       # Part C: Orchestrated ML Pipeline with Mage
 │   ├── metadata.yaml
 │   ├── pipelines/iris_classifier/
