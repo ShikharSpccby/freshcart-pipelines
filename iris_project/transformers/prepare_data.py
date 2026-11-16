@@ -10,7 +10,7 @@ except ImportError:
         return func
 
 
-TEST_SIZE = 0.2
+TEST_SIZE = 0.3
 RANDOM_STATE = 42
 
 
