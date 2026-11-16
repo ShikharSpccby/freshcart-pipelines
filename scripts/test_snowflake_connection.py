@@ -1,4 +1,7 @@
-
+if __name__ == "__main__":
+    # Place your connection test and validation check here
+    if missing:
+        raise ValueError(f"Missing settings: {missing}")
 import os
 import snowflake.connector
 from dotenv import load_dotenv
@@ -56,4 +59,44 @@ except Exception as e:
 
 finally:
     if conn is not None:
+        conn.close()
+import os
+import snowflake.connector
+from dotenv import load_dotenv
+
+load_dotenv()
+
+if __name__ == "__main__":
+    required_settings = ['account', 'user', 'token', 'warehouse', 'database', 'schema']
+    
+    settings = {
+        'account': os.getenv("SNOWFLAKE_ACCOUNT"),
+        'user': os.getenv("SNOWFLAKE_USER"),
+        'token': os.getenv("SNOWFLAKE_TOKEN") or os.getenv("SNOWFLAKE_PASSWORD"),
+        'warehouse': os.getenv("SNOWFLAKE_WAREHOUSE"),
+        'database': os.getenv("SNOWFLAKE_DATABASE"),
+        'schema': os.getenv("SNOWFLAKE_SCHEMA"),
+    }
+    
+    missing = [k for k, v in settings.items() if not v]
+    
+    if missing:
+        raise ValueError(f"Missing settings: {missing}")
+        
+    print("Connecting to Snowflake...")
+    conn = snowflake.connector.connect(
+        account=settings['account'],
+        user=settings['user'],
+        password=settings['token'],
+        warehouse=settings['warehouse'],
+        database=settings['database'],
+        schema=settings['schema']
+    )
+    try:
+        cur = conn.cursor()
+        cur.execute("SELECT CURRENT_VERSION()")
+        version = cur.fetchone()[0]
+        print(f"Successfully connected to Snowflake! Version: {version}")
+    finally:
+        cur.close()
         conn.close()
